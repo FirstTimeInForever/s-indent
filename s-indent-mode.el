@@ -42,11 +42,27 @@
 		  )))
   ))
 
+
+
+(defun s-indent-indent-region(begin end)
+  "Indent current region. This can be broken!"
+  (interactive "rp")
+  (indent-rigidly begin end default-tab-width))
+
+(defun s-indent-unindent-region(begin end)
+  "Undent current region. This can be broken!"
+  (interactive "rp")
+  (indent-rigidly begin end (- 0 default-tab-width)))
+
+
+
 (defun s-indent-tab()
+  "A function that will fix tab with s-indent-mode"
   (interactive)
   (tab-to-tab-stop))
 
 (defun s-indent-ret()
+  "A function that will fix ret with s-indent-mode"
   (interactive)
   (newline)
   (s-indent-indent-line))
@@ -60,7 +76,7 @@
 (defvar s-indent-mode-hook nil)
 
 (defun s-indent-mode()
-  "Major mode for default indent"
+  "Major mode for default indent. It will break your tab and ret bindings!"
   (interactive)
   (print "Your indentation sucks... I mean really sucks")
   (kill-all-local-variables)
@@ -74,7 +90,7 @@
 
 
 (define-minor-mode s-indent-minor-mode
-  "Simple indent mode"
+  "Simple indent mode. It will break your tab and ret bindings!"
   :lighter "S-indent"
   :keymap s-indent-mode-keymap
   (run-hooks 's-indent-mode-hook))
